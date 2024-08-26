@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Untitled</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pegasus Pilot Salary Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Link the manifest -->
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="container">
+    <!-- Headline -->
+    <div class="headline">
+      <h1>Pegasus Pilot Salary Calculator</h1>
+    </div>
+
+    <!-- Step 1: Select Position -->
+    <div class="step" id="step1">
+      <h2>What's your position?</h2>
+      <button onclick="setPosition('firstOfficer')">First Officer</button>
+      <button onclick="setPosition('captain')">Captain</button>
+    </div>
+
+    <!-- Step 2: Select Salary Level -->
+    <div class="step" id="step2" style="display: none;">
+      <h2>What's your salary level?</h2>
+      <select id="salaryLevel" class="dropdown"></select>
+      <button onclick="nextStep()" id="nextButton">Next</button>
+    </div>
+
+    <!-- Step 3: Select Season -->
+    <div class="step" id="step3" style="display: none;">
+      <h2>Is it busy season or normal season?</h2>
+      <button onclick="setSeason('normal')">Normal Season</button>
+      <button onclick="setSeason('busy')">Busy Season</button>
+    </div>
+
+    <!-- Step 4: Sector and Layover Input -->
+    <div class="step full-screen" id="step4" style="display: none;">
+      <h2>Enter your sector numbers:</h2>
+      <div class="sector-box">
+        <label>S1:</label>
+        <select id="s1" class="dropdown"></select>
+      </div>
+      <div class="sector-box">
+        <label>S2:</label>
+        <select id="s2" class="dropdown"></select>
+      </div>
+      <div class="sector-box">
+        <label>S3:</label>
+        <select id="s3" class="dropdown"></select>
+      </div>
+      <div class="sector-box">
+        <label>S4:</label>
+        <select id="s4" class="dropdown"></select>
+      </div>
+      <div class="sector-box">
+        <label>Night:</label>
+        <select id="night" class="dropdown"></select>
+      </div>
+
+      <h2>Enter your layover days:</h2>
+      <div class="layover-box">
+        <label>International:</label>
+        <select id="internationalLayover" class="dropdown"></select>
+      </div>
+      <div class="layover-box">
+        <label>Domestic:</label>
+        <select id="domesticLayover" class="dropdown"></select>
+      </div>
+      <div class="layover-box">
+        <label>Ercan:</label>
+        <select id="ercanLayover" class="dropdown"></select>
+      </div>
+
+      <button id="calculateButton" onclick="calculateSalary()">Calculate Salary</button>
+    </div>
+
+    <!-- Step 5: Display Salary -->
+    <div class="result" id="result" style="display: none;">
+      <h2>Your Total Salary Breakdown</h2>
+      <p><strong>Base Salary:</strong> <span id="baseSalaryResult" class="try-amount">0</span> TRY</p>
+      <p><strong>Sector Fees:</strong> <span id="sectorFeesResult" class="try-amount">0</span> TRY</p>
+      <p><strong>Total Salary (Base + Sector Fees):</strong> <span id="salaryResult" class="try-amount">0</span> TRY</p>
+      <p><strong>Layover Fees:</strong> <span id="layoverResult" class="try-amount">0</span> TRY</p>
+      
+      <h3>Looking at the Bigger Picture: USD & EUR</h3>
+      <p>In USD: <span id="salaryUSD" class="usd">-</span></p>
+      <p>In EUR: <span id="salaryEUR" class="eur">-</span></p>
+    </div>
+  </div>
+
+  <!-- Add the service worker registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+      .then(function(registration) {
+        console.log('Service Worker registered with scope:', registration.scope);
+      }).catch(function(error) {
+        console.log('Service Worker registration failed:', error);
+      });
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>

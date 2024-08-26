@@ -1,0 +1,20 @@
+{
+  "name": "Pegasus Pilot Salary Calculator",
+  "short_name": "SalaryCalc",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffcc00",
+  "theme_color": "#ffcc00",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

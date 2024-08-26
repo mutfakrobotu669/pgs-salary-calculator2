@@ -1,0 +1,122 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffcc00; /* Yellowish-Orange background */
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: #ffffff; /* White background for the container */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.headline {
+  background-color: #ffcc00; /* Yellowish-Orange header */
+  text-align: center;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.headline h1 {
+  font-size: 1.6rem;
+  color: #333333; /* Dark text for contrast */
+}
+
+.step, .result {
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: #333333; /* Dark text color */
+}
+
+.full-screen {
+  min-height: 100vh; /* Ensures the sector and layover section fits the full screen */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background-color: #d32f2f; /* Red for action buttons */
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #b71c1c; /* Darker red for hover */
+}
+
+.sector-box, .layover-box {
+  margin-bottom: 10px;
+}
+
+select.dropdown, input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+  font-size: 1.2rem;
+}
+
+.try-amount {
+  font-weight: bold;
+  color: #d32f2f; /* Red for TRY amounts */
+  font-size: 1.4rem;
+}
+
+.usd {
+  font-weight: bold;
+  color: #28a745; /* Green for USD */
+  font-size: 1.4rem;
+}
+
+.eur {
+  font-weight: bold;
+  color: #007bff; /* Blue for EUR */
+  font-size: 1.4rem;
+}
+
+.result h2 {
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.result h3 {
+  font-size: 1.2rem;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.result p {
+  font-size: 1.2rem;
+  color: #333333;
+  margin: 5px 0;
+}
+
+.result p strong {
+  color: #333333;
+}

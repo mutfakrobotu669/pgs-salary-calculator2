@@ -19,12 +19,43 @@ const layoverRates = {
 };
 
 async function fetchExchangeRates() {
-  const response = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/TRY`);
-  const data = await response.json();
-  return {
-    usd: data.conversion_rates.USD,
-    eur: data.conversion_rates.EUR
-  };
+  const api### Updated `script.js` (continued)
+
+```js
+  const apiUrl = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/TRY`;
+
+  try {
+    // Try to fetch live exchange rates from the API
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    // Return the fetched exchange rates
+    return {
+      usd: data.conversion_rates.USD,
+      eur: data.conversion_rates.EUR
+    };
+  } catch (error) {
+    console.log('Network error, trying cached data...');
+
+    // If the fetch fails, try to use cached data
+    const cachedResponse = await caches.match(apiUrl);
+
+    if (cachedResponse) {
+      const cachedData = await cachedResponse.json();
+      return {
+        usd: cachedData.conversion_rates.USD,
+        eur: cachedData.conversion_rates.EUR
+      };
+    } else {
+      console.log('No cached data available, using fallback rates.');
+
+      // Fallback rates in case both network and cache fail
+      return {
+        usd: 0.1, // Example fallback value for USD
+        eur: 0.09 // Example fallback value for EUR
+      };
+    }
+  }
 }
 
 function setPosition(selectedPosition) {
@@ -72,7 +103,6 @@ function populateSectorDropdowns() {
     }
   });
 
-  // Populate layover dropdowns with 0-50 values
   const layoverDropdownIds = ['internationalLayover', 'domesticLayover', 'ercanLayover'];
 
   layoverDropdownIds.forEach(id => {
@@ -112,7 +142,6 @@ async function calculateSalary() {
     Night: parseInt(document.getElementById('night').value)
   };
 
-  // Calculate sector pay
   let totalSectorPay = 0;
   Object.keys(sectorInputs).forEach(sector => {
     let sectorFee = sectorFees[position][sector];
@@ -122,20 +151,17 @@ async function calculateSalary() {
     totalSectorPay += sectorInputs[sector] * sectorFee;
   });
 
-  // Display base salary and sector fees separately
   document.getElementById('baseSalaryResult').innerText = baseSalary.toLocaleString();
   document.getElementById('sectorFeesResult').innerText = totalSectorPay.toLocaleString();
 
-  // Calculate total salary
   const totalSalary = baseSalary + totalSectorPay;
   document.getElementById('salaryResult').innerText = totalSalary.toLocaleString();
 
-  // Calculate layover fees
   const internationalDays = parseInt(document.getElementById('internationalLayover').value);
   const domesticDays = parseInt(document.getElementById('domesticLayover').value);
   const ercanDays = parseInt(document.getElementById('ercanLayover').value);
 
-  const rates = await fetchExchangeRates(); // Fetch live exchange rates
+  const rates = await fetchExchangeRates();
 
   const internationalLayoverFee = internationalDays * layoverRates.international * rates.eur;
   const domesticLayoverFee = domesticDays * layoverRates.domestic;
@@ -143,14 +169,11 @@ async function calculateSalary() {
 
   const totalLayoverFees = Math.round(internationalLayoverFee + domesticLayoverFee + ercanLayoverFee);
 
-  // Display layover fees
   document.getElementById('layoverResult').innerText = totalLayoverFees.toLocaleString() + ' TRY';
 
-  // Calculate equivalent in USD and EUR
   const salaryUSD = (totalSalary + totalLayoverFees) * rates.usd;
   const salaryEUR = (totalSalary + totalLayoverFees) * rates.eur;
 
-  // Display the converted values
   document.getElementById('salaryUSD').innerText = salaryUSD.toFixed(2);
   document.getElementById('salaryEUR').innerText = salaryEUR.toFixed(2);
 
